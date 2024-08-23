@@ -36,19 +36,19 @@ const BaseInput = styled.input`
   padding: 0 0.5rem;
 
   border: 0;
-  border-bottom: 2px solid ${props => props.theme['gray-500']};
-  
+  border-bottom: 2px solid ${(props) => props.theme['gray-500']};
+
   font-weight: bold;
   font-size: 1.125rem;
-  color: ${props => props.theme['gray-100']};
+  color: ${(props) => props.theme['gray-100']};
 
   &:focus {
     box-shadow: none;
-    border-color: ${props => props.theme['green-500']};
+    border-color: ${(props) => props.theme['green-500']};
   }
 
   &::placeholder {
-    color: ${props => props.theme['gray-500']};
+    color: ${(props) => props.theme['gray-500']};
   }
 `
 
@@ -100,7 +100,7 @@ export const StartCountdownButton = styled.button`
 
   width: 100%;
   padding: 1rem;
-  
+
   border: 0;
   border-radius: 8px;
 
@@ -108,8 +108,8 @@ export const StartCountdownButton = styled.button`
 
   cursor: pointer;
 
-  background: ${props => props.theme['green-500']};
-  color: ${props => props.theme['gray-100']};
+  background: ${(props) => props.theme['green-500']};
+  color: ${(props) => props.theme['gray-100']};
 
   transition: background 0.2s;
 
@@ -119,6 +119,6 @@ export const StartCountdownButton = styled.button`
   }
 
   &:not(:disabled):hover {
-    background: ${props => props.theme['green-700']};
+    background: ${(props) => props.theme['green-700']};
   }
 `
