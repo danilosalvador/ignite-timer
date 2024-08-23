@@ -59,4 +59,28 @@ export const HistoryList = styled.div`
             }
         }
     }
-`;
+`
+
+const STATUS_VARIANT = {
+    InProgress: 'yellow-500',
+    Interrupted: 'red-500',
+    Completed: 'green-500',
+} as const
+
+interface StatusProps {
+    variant: keyof typeof STATUS_VARIANT
+}
+
+export const Status = styled.span<StatusProps>`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+        content: '';
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: ${props => props.theme[STATUS_VARIANT[props.variant]]}
+    }
+`
