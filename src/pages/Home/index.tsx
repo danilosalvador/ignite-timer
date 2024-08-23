@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 
 import { Play } from 'phosphor-react'
 
@@ -12,10 +14,24 @@ import {
   TimeSeparator,
 } from './styles'
 
-export function Home() {
-  const { register, handleSubmit, watch } = useForm()
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, 'Informe a tarefa'),
+  minutesAmount: zod
+    .number()
+    .min(5, 'O ciclo precisa ser de no mínimo 5 minutos')
+    .max(60, 'O ciclo precisa ser de no máximo 60 minutos'),
+})
 
-  function handleCreateNewCycle(data: any) {}
+export function Home() {
+  const { register, handleSubmit, watch, formState } = useForm({
+    resolver: zodResolver(newCycleFormValidationSchema)
+  })
+
+  function handleCreateNewCycle(data: any) {
+    // para pegar as mensagens de erros da validação de campos dos formulários
+    const errors = formState.errors
+    console.log(errors)
+  }
 
   const task = watch('task')
   const isSubmitDisabled = !task
