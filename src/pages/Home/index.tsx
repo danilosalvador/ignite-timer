@@ -21,7 +21,7 @@ const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa'),
   minutesAmount: zod
     .number()
-    .min(5, 'O ciclo precisa ser de no mínimo 5 minutos')
+    .min(1, 'O ciclo precisa ser de no mínimo 1 minuto')
     .max(60, 'O ciclo precisa ser de no máximo 60 minutos'),
 })
 
@@ -38,6 +38,7 @@ interface Cycle {
   minutesAmount: number
   startDate: Date
   interruptedDate?: Date
+  finishDate?: Date
 }
 
 export function Home() {
@@ -104,19 +105,33 @@ export function Home() {
 
     if (activeCycle) {
       interval = setInterval(() => {
-        setAmountSecondsPassed(
-          differenceInSeconds(
-            new Date(), 
-            new Date(activeCycle.startDate)
-          )
+        const diffSeconds = differenceInSeconds(
+          new Date(), 
+          new Date(activeCycle.startDate)
         )
+
+        if (diffSeconds >= totalSeconds) {
+          setCycles(prev => prev.map(cycle => {
+            if (cycle.id === activeCycleId) {
+              return { ...cycle, finishDate: new Date() }
+            }
+
+            return cycle
+          }))
+          setAmountSecondsPassed(totalSeconds)
+          setActiveCycleId(null)
+
+          clearInterval(interval)
+        } else {
+          setAmountSecondsPassed(diffSeconds)
+        }
       }, 1000)
     }
 
     return () => {
       clearInterval(interval)
     }
-  }, [activeCycle])
+  }, [activeCycle, totalSeconds, activeCycleId])
 
   useEffect(() => {
     document.title = !activeCycle ? 'Ignite Timer': `${minutes}:${seconds}`
@@ -147,7 +162,7 @@ export function Home() {
             id="minutesAmount"
             placeholder="00"
             step={5}
-            min={5}
+            min={1}
             max={60}
             disabled={!!activeCycle}
             {...register('minutesAmount', { valueAsNumber: true })}
