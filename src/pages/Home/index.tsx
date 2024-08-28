@@ -66,6 +66,7 @@ export function Home() {
 
     setCycles((prev) => [...prev, newCycle])
     setActiveCycleId(newCycle.id)
+    setAmountSecondsPassed(0)
 
     reset()
   }
@@ -75,7 +76,7 @@ export function Home() {
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
 
-  const minutesAmount = Math.ceil(currentSeconds / 60) // floor para baixo, ceil para cima, around base 5
+  const minutesAmount = Math.floor(currentSeconds / 60) // floor para baixo, ceil para cima, around base 5
   const secondsAmount = currentSeconds % 60
 
   const minutes = String(minutesAmount).padStart(2, '0')
@@ -85,17 +86,29 @@ export function Home() {
   const isSubmitDisabled = !task
 
   useEffect(() => {
+    let interval: number
+
     if (activeCycle) {
-      setInterval(() => {
+      interval = setInterval(() => {
         setAmountSecondsPassed(
           differenceInSeconds(
             new Date(), 
-            activeCycle.startDate
+            new Date(activeCycle.startDate)
           )
         )
       }, 1000)
     }
+
+    return () => {
+      clearInterval(interval)
+    }
   }, [activeCycle])
+
+  useEffect(() => {
+    if (activeCycle) {
+      document.title = `${minutes}:${seconds}`
+    }
+  }, [minutes, seconds, activeCycle])
 
   return (
     <HomeContainer>
