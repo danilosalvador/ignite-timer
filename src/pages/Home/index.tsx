@@ -44,14 +44,20 @@ export function Home() {
   const { handleSubmit, watch, formState, reset } = newCycleForm
 
   // para pegar as mensagens de erros da validação de campos dos formulários
+  // const { formState } = newCycleForm
   // const errors = formState.errors
+
+  function handleCreateNewCycle(data: NewCycleFormData) {
+    createNewCycle(data);
+    reset()
+  }
 
   const task = watch('task')
   const isSubmitDisabled = !task
 
   return (
     <HomeContainer>
-      <form action="" onSubmit={handleSubmit(createNewCycle)}>
+      <form action="" onSubmit={handleSubmit(handleCreateNewCycle)}>
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
