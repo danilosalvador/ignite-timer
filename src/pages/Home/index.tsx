@@ -20,7 +20,7 @@ const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa'),
   minutesAmount: zod
     .number()
-    .min(1, 'O ciclo precisa ser de no mínimo 1 minuto')
+    .min(5, 'O ciclo precisa ser de no mínimo 5 minuto')
     .max(60, 'O ciclo precisa ser de no máximo 60 minutos'),
 })
 
@@ -41,7 +41,7 @@ export function Home() {
       minutesAmount: 0,
     },
   })
-  const { handleSubmit, watch, formState, reset } = newCycleForm
+  const { handleSubmit, watch, reset } = newCycleForm
 
   // para pegar as mensagens de erros da validação de campos dos formulários
   // const { formState } = newCycleForm
