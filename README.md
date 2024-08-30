@@ -1,50 +1,37 @@
-# React + TypeScript + Vite
+<p align="center">  
+   <img src="src/assets/logo.svg" alt="Logotipo"/> 
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
 
-Currently, two official plugins are available:
+![Projeto](https://img.shields.io/badge/danilosalvador-ignite--timer-green)
+![MBA](https://img.shields.io/badge/MBA-full--stack-8234e9)
+![licence mit](https://img.shields.io/badge/license-MIT-green)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+</div>
 
-## Expanding the ESLint configuration
+## 📖 Sobre
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Projeto 12 do [MBA Rocketseat Full-stack](https://www.rocketseat.com.br/mba)  para reforçar os conceitos de **ReactJS**, **TypeScript**, roteamento de páginas com **React Router**, estilos com **Styled Components**, **useReducer** e **immer**.
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+<p align="center">  
+   <img src="files/banner.png" alt="Banner do projeto"/> 
+</p>
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+<br/>
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🎨 Protótipo
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Protótipo do projeto foi desenvolvido no Figma e pode ser acessado [aqui](files/prototype.fig) (by [Rocketseat](https://github.com/rocketseat) ❤️).
+
+<br/>
+
+## 🚀 Visualizar o Projeto
+
+O projeto poderá ser visualizado [aqui](https://danilosalvador.github.io/ignite-timer/dist/index.html).
+
+<br/>
+
+## 📝 Licença
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
