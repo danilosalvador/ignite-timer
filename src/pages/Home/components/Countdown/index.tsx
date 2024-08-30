@@ -1,13 +1,17 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { differenceInSeconds } from 'date-fns'
 
 import { CountdownContainer, TimeSeparator } from './styles'
 import { CyclesContext } from '../../index'
 
 export function Countdown() {
-  const { activeCycle, activeCycleId, markCurrentCycleAsFinished } = useContext(CyclesContext)
-
-  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
+  const {
+    activeCycle,
+    activeCycleId,
+    amountSecondsPassed,
+    markCurrentCycleAsFinished,
+    updateSecondsPassed,
+  } = useContext(CyclesContext)
 
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
@@ -30,10 +34,10 @@ export function Countdown() {
 
         if (diffSeconds >= totalSeconds) {
           markCurrentCycleAsFinished()
-          setAmountSecondsPassed(totalSeconds)
+          updateSecondsPassed(totalSeconds)
           clearInterval(interval)
         } else {
-          setAmountSecondsPassed(diffSeconds)
+          updateSecondsPassed(diffSeconds)
         }
       }, 1000)
     }
@@ -42,7 +46,7 @@ export function Countdown() {
       clearInterval(interval)
     }
   }, [activeCycle, totalSeconds, activeCycleId, markCurrentCycleAsFinished])
-  
+
   useEffect(() => {
     document.title = !activeCycle ? 'Ignite Timer' : `${minutes}:${seconds}`
   }, [minutes, seconds, activeCycle])
