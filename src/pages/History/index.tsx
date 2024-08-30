@@ -24,19 +24,27 @@ export function History() {
             </tr>
           </thead>
           <tbody>
-            {cycles.map(cycle => {
+            {cycles.map((cycle) => {
               return (
                 <tr key={cycle.id}>
                   <td>{cycle.task}</td>
                   <td>{cycle.minutesAmount} minutos</td>
-                  <td>{formatDistanceToNow(cycle.startDate, {
-                    addSuffix: true,
-                    locale: ptBR,
-                  })}</td>
                   <td>
-                    { !cycle.finishDate && !cycle.interruptedDate && <Status variant="InProgress">Em andamento</Status> }
-                    { !!cycle.finishDate && <Status variant="Completed">Concluído</Status> }
-                    { !!cycle.interruptedDate && <Status variant="Interrupted">Interrompido</Status> }
+                    {formatDistanceToNow(cycle.startDate, {
+                      addSuffix: true,
+                      locale: ptBR,
+                    })}
+                  </td>
+                  <td>
+                    {!cycle.finishDate && !cycle.interruptedDate && (
+                      <Status variant="InProgress">Em andamento</Status>
+                    )}
+                    {!!cycle.finishDate && (
+                      <Status variant="Completed">Concluído</Status>
+                    )}
+                    {!!cycle.interruptedDate && (
+                      <Status variant="Interrupted">Interrompido</Status>
+                    )}
                   </td>
                 </tr>
               )
